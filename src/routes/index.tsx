@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { App } from "./App";
-import { GameLog } from "../routes/GameLog";
+import { GameLog } from "./GameLog";
 import { Onboarding } from "./Onboarding";
 import { storage } from "../utils/storage";
 

@@ -10,8 +10,6 @@ export function App() {
     return <Navigate to="/onboarding" />;
   }
 
-  console.log(styles);
-
   return (
     <div>
       <header className={styles.header}>
