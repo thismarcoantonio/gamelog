@@ -1,9 +1,9 @@
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLoaderData } from "react-router-dom";
 
 export function App() {
-  const hasProfileUsername = false;
+  const loaderData = useLoaderData() as { username: string };
 
-  if (!hasProfileUsername) {
+  if (!loaderData.username) {
     return <Navigate to="/onboarding" />;
   }
 

@@ -14,6 +14,17 @@
   font-size: 18px;
   margin-top: 8px;
   text-align: center;
+  color: #cecece; /* TODO: Add colors to global css */
+}
+
+.input {
+  width: 80%;
+  margin: 32px auto 0;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #d7d7d7; /* TODO: Add colors to global css */
+  background-color: #323232; /* TODO: Add colors to global css */
 }
 
 .ellipsisProgress {
@@ -38,8 +49,7 @@
 .button {
   width: 100%;
   padding: 16px;
-  margin-top: 16px;
-  margin-bottom: 64px;
+  margin: 16px 0;
   border-radius: 30px;
   font-size: 16px;
   font-weight: 600;

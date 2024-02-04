@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate, useLoaderData } from "react-router-dom";
 import cn from "classnames";
 import { OnboardingCards } from "../../components/Onboarding/OnboardingCards";
 import styles from "./styles.module.css";
@@ -12,6 +12,7 @@ import onboarding06 from "../../assets/onboarding-06.jpg";
 import onboarding07 from "../../assets/onboarding-07.jpg";
 import onboarding08 from "../../assets/onboarding-08.jpg";
 import onboarding09 from "../../assets/onboarding-09.jpg";
+import { storage } from "../../utils/storage";
 
 const onboardingCardImages = [
   onboarding01,
@@ -45,6 +46,9 @@ const steps = [
 
 export function Onboarding() {
   const [step, setStep] = useState(0);
+  const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const loaderData = useLoaderData() as { username: string };
 
   const activeStep = useMemo(() => {
     return steps[step];
@@ -54,17 +58,21 @@ export function Onboarding() {
     return step === steps.length - 1;
   }, [step]);
 
-  const hasProfileUsername = false;
-  if (hasProfileUsername) {
+  if (loaderData.username) {
     return <Navigate to="/" />;
   }
 
   const handleContinue = () => {
     if (isFinalStep) {
-      // do something
-      return;
+      storage.setItem({ username });
+      return navigate({ pathname: "/" });
     }
     return setStep((step) => step + 1);
+  };
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setUsername(value);
   };
 
   return (
@@ -76,7 +84,13 @@ export function Onboarding() {
           <p className={styles.description}>{activeStep.description}</p>
         </div>
       </div>
-      {isFinalStep && <input />}
+      {isFinalStep && (
+        <input
+          placeholder="Username"
+          className={styles.input}
+          onChange={handleInput}
+        />
+      )}
       <div className={styles.ellipsisProgress}>
         {steps.map((_, index) => (
           <span
@@ -87,7 +101,11 @@ export function Onboarding() {
           />
         ))}
       </div>
-      <button className={styles.button} onClick={handleContinue}>
+      <button
+        onClick={handleContinue}
+        className={styles.button}
+        disabled={isFinalStep && !username}
+      >
         {isFinalStep ? "Finish" : "Continue"}
       </button>
     </div>

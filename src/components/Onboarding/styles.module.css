@@ -10,6 +10,7 @@
   height: 180px;
   position: absolute;
   border-radius: 20px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .card:nth-child(1) {
