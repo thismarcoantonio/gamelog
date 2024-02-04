@@ -1,0 +1,36 @@
+.gameCard {
+  flex-shrink: 0;
+  width: 208px;
+  height: 256px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.gameCardTitle {
+  font-size: 18px;
+  padding-right: 16px;
+}
+
+.gameCardImage,
+.gameCardImageOverlay {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.gameCardImageOverlay {
+  border-radius: 15px;
+  background: linear-gradient(rgba(21, 21, 21, 0.2), var(--color-bg));
+}
+
+.gameCardImage {
+  object-fit: cover;
+  border-radius: inherit;
+}
