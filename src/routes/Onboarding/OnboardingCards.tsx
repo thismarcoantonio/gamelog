@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./styles.module.css";
+import styles from "./OnboardingCards.module.css";
 
 interface Props {
   cards: string[];

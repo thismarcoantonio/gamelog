@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { Navigate, useNavigate, useLoaderData } from "react-router-dom";
 import cn from "classnames";
 import { OnboardingCards } from "./OnboardingCards";
-import styles from "./styles.module.css";
+import styles from "./index.module.css";
 import onboarding01 from "../../assets/onboarding-01.jpg";
 import onboarding02 from "../../assets/onboarding-02.jpg";
 import onboarding03 from "../../assets/onboarding-03.jpg";
