@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { App } from "./App";
+import { GameLog } from "../routes/GameLog";
 import { Onboarding } from "./Onboarding";
 import { storage } from "../utils/storage";
 
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
     loader: () => {
       return storage.getItem();
     },
-    children: [{ path: "/", element: <div>Page</div> }],
+    children: [{ path: "/", element: <GameLog /> }],
   },
   {
     path: "/onboarding",
