@@ -16,7 +16,7 @@ export function App() {
         <h1 className={styles.title}>GameLog</h1>
         <Icon icon="filter"></Icon>
       </header>
-      <main>
+      <main className={styles.main}>
         <Outlet />
       </main>
       <MobileNavigation />
