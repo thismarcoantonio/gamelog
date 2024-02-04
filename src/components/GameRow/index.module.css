@@ -1,0 +1,10 @@
+.image {
+  width: 104px;
+  height: 104px;
+  margin-right: 12px;
+  border-radius: 12px;
+}
+
+.gameRow {
+  display: flex;
+}
