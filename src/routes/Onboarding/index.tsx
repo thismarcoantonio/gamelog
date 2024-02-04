@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import { Navigate, useNavigate, useLoaderData } from "react-router-dom";
 import cn from "classnames";
-import { OnboardingCards } from "../../components/Onboarding/OnboardingCards";
+import { OnboardingCards } from "./OnboardingCards";
 import styles from "./styles.module.css";
 import onboarding01 from "../../assets/onboarding-01.jpg";
 import onboarding02 from "../../assets/onboarding-02.jpg";
@@ -14,33 +14,20 @@ import onboarding08 from "../../assets/onboarding-08.jpg";
 import onboarding09 from "../../assets/onboarding-09.jpg";
 import { storage } from "../../utils/storage";
 
-const onboardingCardImages = [
-  onboarding01,
-  onboarding02,
-  onboarding03,
-  onboarding04,
-  onboarding05,
-  onboarding06,
-  onboarding07,
-  onboarding08,
-  onboarding09,
-];
+const onboardingCardImages = [onboarding01, onboarding02, onboarding03, onboarding04, onboarding05, onboarding06, onboarding07, onboarding08, onboarding09];
 
 const steps = [
   {
     title: "Track your gaming history",
-    description:
-      "Retrieve historical data of your gaming adventure, uncovering insights from the games you've completed.",
+    description: "Retrieve historical data of your gaming adventure, uncovering insights from the games you've completed.",
   },
   {
     title: "Data direct from RAWG",
-    description:
-      "Your gaming data comes straight from RAWG, a trusted website for comprehensive gaming information.",
+    description: "Your gaming data comes straight from RAWG, a trusted website for comprehensive gaming information.",
   },
   {
     title: "Personalize Your Experience",
-    description:
-      "To get started, enter your RAWG username. This step ensures that the information presented is uniquely yours.",
+    description: "To get started, enter your RAWG username. This step ensures that the information presented is uniquely yours.",
   },
 ];
 
@@ -84,13 +71,7 @@ export function Onboarding() {
           <p className={styles.description}>{activeStep.description}</p>
         </div>
       </div>
-      {isFinalStep && (
-        <input
-          placeholder="Username"
-          className={styles.input}
-          onChange={handleInput}
-        />
-      )}
+      {isFinalStep && <input placeholder="Username" className={styles.input} onChange={handleInput} />}
       <div className={styles.ellipsisProgress}>
         {steps.map((_, index) => (
           <span
@@ -101,11 +82,7 @@ export function Onboarding() {
           />
         ))}
       </div>
-      <button
-        onClick={handleContinue}
-        className={styles.button}
-        disabled={isFinalStep && !username}
-      >
+      <button onClick={handleContinue} className={styles.button} disabled={isFinalStep && !username}>
         {isFinalStep ? "Finish" : "Continue"}
       </button>
     </div>
