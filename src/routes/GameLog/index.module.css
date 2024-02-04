@@ -1,3 +1,16 @@
 .currentlyPlaying {
   margin-top: -20vh;
 }
+
+.currentlyPlayingResults {
+  display: flex;
+  gap: 12px;
+  margin-left: 16px;
+  overflow-x: scroll;
+  padding-right: 16px;
+  padding-bottom: 12px;
+}
+
+.completed {
+  margin-top: 24px;
+}
