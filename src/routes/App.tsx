@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 export function App() {
-  const hasProfileUsername = true;
+  const hasProfileUsername = false;
 
   if (!hasProfileUsername) {
     return <Navigate to="/onboarding" />;

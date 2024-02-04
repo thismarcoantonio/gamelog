@@ -1,0 +1,46 @@
+.onboarding {
+  padding: 16px;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 24px;
+  text-align: center;
+}
+
+.description {
+  font-size: 18px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.ellipsisProgress {
+  gap: 8px;
+  display: flex;
+  margin-top: auto;
+  justify-content: center;
+}
+
+.ellipsis {
+  width: 8px;
+  height: 8px;
+  opacity: 0.3;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.ellipsisActive {
+  opacity: 1;
+}
+
+.button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 64px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 600;
+}
