@@ -5,7 +5,7 @@
 .currentlyPlayingResults {
   display: flex;
   gap: 12px;
-  margin-left: 16px;
+  padding-left: 16px;
   overflow-x: scroll;
   padding-right: 16px;
   padding-bottom: 12px;
