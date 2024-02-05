@@ -1,12 +1,13 @@
-import { Navigate, Outlet, useLoaderData } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { MobileNavigation } from "../../components/MobileNavigation";
 import { Icon } from "../../components/Icon";
 import styles from "./styles.module.css";
+import { useData } from "../../hooks/useData";
 
 export function App() {
-  const loaderData = useLoaderData() as { username: string };
+  const data = useData();
 
-  if (!loaderData.username) {
+  if (!data.username) {
     return <Navigate to="/onboarding" />;
   }
 

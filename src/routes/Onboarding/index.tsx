@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Navigate, useNavigate, useLoaderData } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import cn from "classnames";
 import { OnboardingCards } from "./OnboardingCards";
 import styles from "./index.module.css";
@@ -12,7 +12,7 @@ import onboarding06 from "../../assets/onboarding-06.jpg";
 import onboarding07 from "../../assets/onboarding-07.jpg";
 import onboarding08 from "../../assets/onboarding-08.jpg";
 import onboarding09 from "../../assets/onboarding-09.jpg";
-import { storage } from "../../utils/storage";
+import { useData } from "../../hooks/useData";
 
 const onboardingCardImages = [onboarding01, onboarding02, onboarding03, onboarding04, onboarding05, onboarding06, onboarding07, onboarding08, onboarding09];
 
@@ -35,7 +35,7 @@ export function Onboarding() {
   const [step, setStep] = useState(0);
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const loaderData = useLoaderData() as { username: string };
+  const data = useData();
 
   const activeStep = useMemo(() => {
     return steps[step];
@@ -45,13 +45,13 @@ export function Onboarding() {
     return step === steps.length - 1;
   }, [step]);
 
-  if (loaderData.username) {
+  if (data.username) {
     return <Navigate to="/" />;
   }
 
   const handleContinue = () => {
     if (isFinalStep) {
-      storage.setItem({ username });
+      data.updateUsername(username);
       return navigate({ pathname: "/" });
     }
     return setStep((step) => step + 1);

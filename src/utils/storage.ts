@@ -1,13 +1,15 @@
-// TODO: Move this file to reactive state somewhere
-const key = "gamelog_preferences";
+enum Keys {
+  PREFERENCES = "gamelog_preferences",
+  PLAYING_RESULTS = "gamelog_playing_results",
+}
 
-function getItem() {
+function getItem(key: Keys) {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : {};
 }
 
-function setItem(value: object) {
-  const previousPreferences = getItem();
+function setItem(key: Keys, value: object) {
+  const previousPreferences = getItem(key);
   const preferences = JSON.stringify({
     ...previousPreferences,
     ...value,
@@ -19,4 +21,5 @@ function setItem(value: object) {
 export const storage = {
   getItem,
   setItem,
+  Keys,
 };
