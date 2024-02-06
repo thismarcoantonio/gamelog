@@ -3,6 +3,9 @@ import { storage } from "../utils/storage";
 
 const api = axios.create({
   baseURL: "https://rawg.io/api",
+  headers: {
+    token: `Token ${import.meta.env.VITE_RAWG_TOKEN}`,
+  },
 });
 
 export interface Result {
@@ -15,9 +18,7 @@ export interface Result {
 }
 
 export interface PaginatedResults {
-  page: number;
   count: number;
-  hasNextPage: boolean;
   results: Result[];
 }
 
@@ -39,26 +40,26 @@ interface PaginatedResponse {
   results: ResultResponse[];
 }
 
-export async function getPlayingResults(page: number): Promise<PaginatedResults> {
-  const previousResults = storage.getItem(storage.Keys.PLAYING_RESULTS);
-  if (previousResults.page >= page) {
-    return previousResults;
-  }
+export async function getGameResults({ page = 1, size = 50, type, previousResults, username }: { page?: number; size?: number; type: "playing" | "completed"; previousResults?: Result[]; username: string }) {
+  const isCompleted = type === "completed";
+  const storageKey = isCompleted ? storage.Keys.COMPLETED_RESULTS : storage.Keys.PLAYING_RESULTS;
 
-  const { data } = await api.get<PaginatedResponse>(`/users/thismarcoantonio/games`, {
+  const previousGameResults = storage.getItem(storageKey);
+  if (previousGameResults.count >= 0) return previousGameResults;
+
+  const { data } = await api.get<PaginatedResponse>(`/users/${username}/games`, {
     params: {
       ordering: "-created",
-      statuses: "playing",
-      page_size: 10,
+      statuses: isCompleted ? "beaten" : "playing",
+      page_size: size,
       page,
       key: import.meta.env.VITE_RAWG_API,
     },
   });
-  const result = {
-    page,
-    count: data.count,
-    hasNextPage: !!data.next,
-    results: data.results.map((result) => ({
+
+  const results: Result[] = [
+    ...(previousResults || []),
+    ...data.results.map((result) => ({
       id: result.id,
       name: result.name,
       released: result.released,
@@ -66,20 +67,20 @@ export async function getPlayingResults(page: number): Promise<PaginatedResults>
       rating: result.metacritic,
       image: result.background_image,
     })),
-  };
-  storage.setItem(storage.Keys.PLAYING_RESULTS, result);
-  return result;
-}
+  ];
 
-export async function getCompletedResults() {
-  const { data } = await api.get(`/users/thismarcoantonio/games`, {
-    params: {
-      ordering: "-created",
-      statuses: "beaten",
-      page_size: 20,
-      page: 1,
-      key: import.meta.env.VITE_RAWG_API,
-    },
-  });
-  console.log(data);
+  if (data.next) {
+    return getGameResults({
+      page: page + 1,
+      size,
+      type,
+      username,
+      previousResults: results,
+    });
+  }
+
+  const result = { count: data.count, results };
+  storage.setItem(storageKey, result);
+
+  return result;
 }

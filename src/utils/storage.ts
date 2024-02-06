@@ -1,8 +1,7 @@
-import { PaginatedResults } from "../data";
-
 enum Keys {
   PREFERENCES = "gamelog_preferences",
   PLAYING_RESULTS = "gamelog_playing_results",
+  COMPLETED_RESULTS = "gamelog_completed_results",
 }
 
 function getItem(key: Keys) {
@@ -11,30 +10,17 @@ function getItem(key: Keys) {
 }
 
 function setItem(key: Keys, value: object) {
-  const previousPreferences = getItem(key);
-  const preferences = JSON.stringify({
-    ...previousPreferences,
+  const previousValue = getItem(key);
+  const item = JSON.stringify({
+    ...previousValue,
     ...value,
   });
 
-  return localStorage.setItem(key, preferences);
-}
-
-function setPaginatedItem(key: Keys, pagination: PaginatedResults) {
-  const previousValue = getItem(key);
-  const value = JSON.stringify({
-    page: pagination.page,
-    count: previousValue.count,
-    hasNextPage: pagination.hasNextPage,
-    results: [...(previousValue.results || []), ...pagination.results],
-  });
-
-  return localStorage.setItem(key, value);
+  return localStorage.setItem(key, item);
 }
 
 export const storage = {
   getItem,
   setItem,
-  setPaginatedItem,
   Keys,
 };

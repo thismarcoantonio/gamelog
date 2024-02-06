@@ -12,6 +12,8 @@ export interface Context {
   updateUsername: (username: string) => void;
   playingResults: PaginatedResults | null;
   updatePlayingResults: (value: PaginatedResults) => void;
+  completedResults: PaginatedResults | null;
+  updateCompletedResults: (value: PaginatedResults) => void;
 }
 
 const noop = () => null;
@@ -21,6 +23,8 @@ export const DataContext = createContext<Context>({
   updateUsername: noop,
   playingResults: null,
   updatePlayingResults: noop,
+  completedResults: null,
+  updateCompletedResults: noop,
 });
 
 const preferences = storage.getItem(storage.Keys.PREFERENCES);
@@ -28,6 +32,7 @@ const preferences = storage.getItem(storage.Keys.PREFERENCES);
 export function DataProvider({ children }: Props) {
   const [username, setUsername] = useState<string | null>(preferences.username ?? null);
   const [playingResults, setPlayingResults] = useState<PaginatedResults | null>(null);
+  const [completedResults, setCompletedResults] = useState<PaginatedResults | null>(null);
 
   function updateUsername(username: string) {
     setUsername(username);
@@ -38,5 +43,9 @@ export function DataProvider({ children }: Props) {
     setPlayingResults(value);
   }
 
-  return <DataContext.Provider value={{ username, updateUsername, playingResults, updatePlayingResults }}>{children}</DataContext.Provider>;
+  function updateCompletedResults(value: PaginatedResults) {
+    setCompletedResults(value);
+  }
+
+  return <DataContext.Provider value={{ username, updateUsername, playingResults, updatePlayingResults, completedResults, updateCompletedResults }}>{children}</DataContext.Provider>;
 }

@@ -9,7 +9,8 @@ import styles from "./index.module.css";
 import sample from "../../data/sample";
 
 export function GameLog() {
-  const { playingResults } = useData();
+  const { playingResults, completedResults } = useData();
+  console.log(playingResults, completedResults);
 
   return (
     <div>
@@ -23,14 +24,16 @@ export function GameLog() {
           </div>
         </Section>
       )}
-      <Section title="Completed" className={styles.completed}>
-        {sample.results.map((result, index) => (
-          <Fragment key={result.id}>
-            {index > 0 && <Divider />}
-            <GameRow title={result.name} image={result.background_image} dateRelease={result.released} dateCompleted={result.user_game.added} />
-          </Fragment>
-        ))}
-      </Section>
+      {!!completedResults?.results.length && (
+        <Section title="Completed" className={styles.completed}>
+          {completedResults.results.map((result, index) => (
+            <Fragment key={result.id}>
+              {index > 0 && <Divider />}
+              <GameRow title={result.name} image={result.image} dateRelease={result.released} dateCompleted={result.released} />
+            </Fragment>
+          ))}
+        </Section>
+      )}
     </div>
   );
 }

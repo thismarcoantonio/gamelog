@@ -2,21 +2,27 @@ import { useEffect, useCallback } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { MobileNavigation } from "../../components/MobileNavigation";
 import { Icon } from "../../components/Icon";
-import styles from "./styles.module.css";
+import { getGameResults } from "../../data";
 import { useData } from "../../hooks/useData";
-import { getPlayingResults } from "../../data";
+import styles from "./styles.module.css";
 
 export function App() {
-  const { updatePlayingResults, username } = useData();
+  const { updatePlayingResults, updateCompletedResults, username } = useData();
 
   const fetchPlayingResults = useCallback(async () => {
-    const playingResults = await getPlayingResults(1);
+    const playingResults = await getGameResults({ size: 10, type: "playing", username: username! });
     updatePlayingResults(playingResults);
-  }, [updatePlayingResults]);
+  }, [updatePlayingResults, username]);
+
+  const fetchCompletedResults = useCallback(async () => {
+    const completedResults = await getGameResults({ size: 50, type: "completed", username: username! });
+    updateCompletedResults(completedResults);
+  }, [updateCompletedResults, username]);
 
   useEffect(() => {
     if (username) {
       fetchPlayingResults();
+      fetchCompletedResults();
     }
   }, []);
 
