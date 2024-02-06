@@ -1,4 +1,5 @@
 import { Image } from "../Image";
+import { Divider } from "../Divider";
 import styles from "./index.module.css";
 
 interface Props {
@@ -10,13 +11,16 @@ interface Props {
 
 export function GameRow({ image, title, dateRelease, dateCompleted }: Props) {
   return (
-    <article className={styles.gameRow}>
-      <Image src={image} className={styles.image} />
-      <div>
-        <h1>{title}</h1>
-        <p>{dateRelease}</p>
-        <p>{dateCompleted}</p>
-      </div>
-    </article>
+    <div>
+      <article className={styles.gameRow}>
+        <Image src={image} className={styles.image} />
+        <div>
+          <h1>{title}</h1>
+          <p>{dateRelease}</p>
+          <p>{dateCompleted}</p>
+        </div>
+      </article>
+      <Divider />
+    </div>
   );
 }
