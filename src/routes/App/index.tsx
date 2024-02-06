@@ -7,14 +7,16 @@ import { useData } from "../../hooks/useData";
 import styles from "./styles.module.css";
 
 export function App() {
-  const { updatePlayingResults, updateCompletedResults, username } = useData();
+  const { updatePlayingResults, updateCompletedResults, setPlayingLoading, setCompletedLoading, username } = useData();
 
   const fetchPlayingResults = useCallback(async () => {
+    setPlayingLoading();
     const playingResults = await getGameResults({ size: 10, type: "playing", username: username! });
     updatePlayingResults(playingResults);
   }, [updatePlayingResults, username]);
 
   const fetchCompletedResults = useCallback(async () => {
+    setCompletedLoading();
     const completedResults = await getGameResults({ size: 50, type: "completed", username: username! });
     updateCompletedResults(completedResults);
   }, [updateCompletedResults, username]);
