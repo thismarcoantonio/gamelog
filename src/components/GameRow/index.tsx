@@ -1,6 +1,7 @@
 import { Image } from "../Image";
 import { Divider } from "../Divider";
 import styles from "./index.module.css";
+import { formatDate } from "../../utils/date";
 
 interface Props {
   image: string;
@@ -16,8 +17,8 @@ export function GameRow({ image, title, dateRelease, dateCompleted }: Props) {
         <Image src={image} className={styles.image} />
         <div>
           <h1>{title}</h1>
-          <p>{dateRelease}</p>
-          <p>{dateCompleted}</p>
+          <p>Released: {formatDate(dateRelease)}</p>
+          <p>Completed: {formatDate(dateCompleted)}</p>
         </div>
       </article>
       <Divider />
