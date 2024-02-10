@@ -6,8 +6,6 @@ import styles from "./index.module.css";
 export function Statistics() {
   const { completedResults } = useData();
 
-  console.log(completedResults);
-
   if (!completedResults?.results) {
     return null;
   }

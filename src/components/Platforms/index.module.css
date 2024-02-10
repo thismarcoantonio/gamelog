@@ -3,3 +3,7 @@
   align-items: center;
   gap: 4px;
 }
+
+.inactivePlatform {
+  opacity: 0.4;
+}

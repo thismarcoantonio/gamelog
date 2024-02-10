@@ -1,3 +1,4 @@
+import cn from "classnames";
 import { Icon, IconTypes } from "../Icon";
 import styles from "./index.module.css";
 
@@ -13,11 +14,15 @@ function getGamePlatforms(gamePlatforms: string[]) {
 }
 
 export function Platforms({ gamePlatforms, selectedPlatform }: Props) {
-  console.log(selectedPlatform);
   return (
     <div className={styles.platforms}>
       {getGamePlatforms(gamePlatforms).map((platform) => (
-        <Icon icon={platform as IconTypes} size={20} />
+        <Icon
+          key={platform}
+          icon={platform as IconTypes}
+          size={20}
+          className={cn({ [styles.inactivePlatform]: !selectedPlatform?.includes(platform) })}
+        />
       ))}
     </div>
   );
