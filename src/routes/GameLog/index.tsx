@@ -32,6 +32,8 @@ export function GameLog() {
                 image={result.image}
                 dateRelease={result.released}
                 dateCompleted={result.user.added}
+                platforms={result.platforms}
+                selectedPlatform={result.user.platform}
               />
             ))}
           </VirtualList>

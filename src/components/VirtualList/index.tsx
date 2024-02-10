@@ -10,7 +10,7 @@ export function VirtualList({ children }: Props) {
 
   const virtualizer = useWindowVirtualizer({
     count: children.length,
-    estimateSize: () => 121,
+    estimateSize: () => 176,
     overscan: 5,
     scrollMargin: listRef.current?.offsetTop ?? 0,
   });
