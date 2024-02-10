@@ -14,7 +14,7 @@ export function GameLog() {
     <div>
       <GameLogHeading image={completedResults?.results[0].image ?? ""} />
       {!!playingResults?.results.length && (
-        <Section title={`Currently playing (${playingResults!.count})`} className={styles.currentlyPlaying} noGutters>
+        <Section title={`Currently playing (${playingResults.count})`} className={styles.currentlyPlaying} noGutters>
           <div className={styles.currentlyPlayingResults}>
             {playingResults?.results.map((result) => (
               <GameCard title={result.name} image={result.image} key={result.id} />
@@ -23,7 +23,7 @@ export function GameLog() {
         </Section>
       )}
       {!!completedResults?.results.length && (
-        <Section title="Completed" className={styles.completed}>
+        <Section title={`Completed (${completedResults.count})`} className={styles.completed}>
           <VirtualList>
             {completedResults!.results.map((result) => (
               <GameRow
