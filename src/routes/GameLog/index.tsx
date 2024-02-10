@@ -31,7 +31,7 @@ export function GameLog() {
                 title={result.name}
                 image={result.image}
                 dateRelease={result.released}
-                dateCompleted={result.released}
+                dateCompleted={result.user.added}
               />
             ))}
           </VirtualList>

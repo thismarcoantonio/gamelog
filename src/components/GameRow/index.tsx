@@ -17,8 +17,8 @@ export function GameRow({ image, title, dateRelease, dateCompleted }: Props) {
         <Image src={image} className={styles.image} />
         <div>
           <h1>{title}</h1>
-          <p>Released: {formatDate(dateRelease)}</p>
           <p>Completed: {formatDate(dateCompleted)}</p>
+          <p>Released: {formatDate(dateRelease)}</p>
         </div>
       </article>
       <Divider />
